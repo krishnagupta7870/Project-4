@@ -52,7 +52,7 @@ const app = express();
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: isProduction ? true : (process.env.CORS_ORIGIN || FRONTEND_URL),
+    origin: process.env.CORS_ORIGIN || FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true
   }
@@ -68,7 +68,7 @@ app.set("io", io);
 setIo(io);
 // Middlewares
 app.use(cors({
-  origin: isProduction ? true : (process.env.CORS_ORIGIN || FRONTEND_URL),
+  origin: process.env.CORS_ORIGIN || FRONTEND_URL,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   credentials: true,
 }));
@@ -101,16 +101,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subCategoryRoutes);
 
 // Basic health & API root endpoints
-// Serve Frontend in Production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/build")));
-  app.get("*", (req, res, next) => {
-    if (req.path.startsWith("/api")) return next();
-    res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => res.send("Backend is running!"));
-}
+app.get("/", (req, res) => res.send("DealMate Backend is running!"));
 app.get("/api", (req, res) => res.json({ message: "API running" }));
 
 // Central error handler (simple)

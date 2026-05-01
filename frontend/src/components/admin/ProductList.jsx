@@ -61,7 +61,7 @@ const ProductList = () => {
   const getImageSrc = (img) => {
     if (!img) return "/placeholder.jpg";
     if (img.startsWith("http")) return img;
-    return `${img}`;
+    return `${API_ORIGIN}${img}`;
   };
 
   const getStatusBadge = (status) => {

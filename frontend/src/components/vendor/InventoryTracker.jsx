@@ -297,7 +297,7 @@ export default function InventoryTracker() {
                                 <td>
                                     <div className="product-info">
                                         <img
-                                            src={p.images && p.images[0] ? (p.images[0].startsWith('http') ? p.images[0] : `${p.images[0]}`) : "/placeholder.jpg"}
+                                            src={p.images && p.images[0] ? (p.images[0].startsWith('http') ? p.images[0] : `${API_ORIGIN}${p.images[0]}`) : "/placeholder.jpg"}
                                             alt={p.name}
                                             style={{ width: 40, height: 40, borderRadius: 6, objectFit: 'cover' }}
                                         />

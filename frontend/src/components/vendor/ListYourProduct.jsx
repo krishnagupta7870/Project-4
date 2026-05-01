@@ -607,7 +607,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
           {formData.images.map((img, index) => (
             <div key={index} className={`image-card ${index === 0 ? 'cover-image' : ''}`}>
               <img
-                src={img.startsWith('http') ? img : `${img}`}
+                src={img.startsWith('http') ? img : `${API_ORIGIN}${img}`}
                 alt={`Product ${index}`}
               />
               {index === 0 && <div className="cover-badge">Cover</div>}
@@ -904,7 +904,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
         <div className="preview-image">
           {formData.images.length > 0 ? (
             <img
-              src={formData.images[0].startsWith('http') ? formData.images[0] : `${formData.images[0]}`}
+              src={formData.images[0].startsWith('http') ? formData.images[0] : `${API_ORIGIN}${formData.images[0]}`}
               alt="Preview"
             />
           ) : (

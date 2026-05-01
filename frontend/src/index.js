@@ -5,6 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import axios from 'axios';
+import { API_ORIGIN } from './utils/api';
+
+// Configure axios globally for direct calls
+axios.defaults.baseURL = API_ORIGIN;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

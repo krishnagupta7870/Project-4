@@ -1,10 +1,12 @@
 services:
+  # Backend Web Service
   - type: web
-    name: dealmate
+    name: dealmate-backend
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
     envVars:
       - key: NODE_ENV
         value: production
@@ -14,6 +16,8 @@ services:
         sync: false
       - key: JWT_EXPIRES_IN
         value: 7d
+      - key: FRONTEND_URL
+        sync: false # Set this to the frontend URL after deployment
       - key: MAIL_PROVIDER
         value: gmail
       - key: MAIL_HOST
@@ -44,3 +48,14 @@ services:
         sync: false
       - key: CLOUD_API_SECRET
         sync: false
+
+  # Frontend Static Site
+  - type: static
+    name: dealmate-frontend
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: build
+    envVars:
+      - key: REACT_APP_API_URL
+        sync: false # Set this to the backend URL + /api after deployment
