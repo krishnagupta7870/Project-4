@@ -37,7 +37,8 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, ".env") });
 
 // Quick env sanity checks
-const { MONGO_URI, PORT = 5000, FRONTEND_URL = "http://localhost:3000" } = process.env;
+const { MONGO_URI, PORT = 5000, FRONTEND_URL = "http://localhost:3000", NODE_ENV = "development" } = process.env;
+const isProduction = NODE_ENV === "production";
 if (!MONGO_URI) {
   console.error("❌ MONGO_URI is not set in .env. Please set it and restart.");
   process.exit(1);
@@ -51,7 +52,7 @@ const app = express();
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.CORS_ORIGIN || FRONTEND_URL,
+    origin: isProduction ? true : (process.env.CORS_ORIGIN || FRONTEND_URL),
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true
   }
@@ -67,7 +68,7 @@ app.set("io", io);
 setIo(io);
 // Middlewares
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || FRONTEND_URL, // restrict to frontend in production
+  origin: isProduction ? true : (process.env.CORS_ORIGIN || FRONTEND_URL),
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   credentials: true,
 }));
@@ -100,7 +101,16 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subCategoryRoutes);
 
 // Basic health & API root endpoints
-app.get("/", (req, res) => res.send("Backend is running!"));
+// Serve Frontend in Production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  app.get("*", (req, res, next) => {
+    if (req.path.startsWith("/api")) return next();
+    res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => res.send("Backend is running!"));
+}
 app.get("/api", (req, res) => res.json({ message: "API running" }));
 
 // Central error handler (simple)
@@ -122,8 +132,8 @@ async function startServer() {
     mongoose.connection.on("error", (err) => console.error("Mongoose connection error:", err));
     mongoose.connection.on("disconnected", () => console.log("Mongoose: disconnected"));
 
-    const server = httpServer.listen(PORT, () => {
-      console.log(`🚀 Backend running on port ${PORT}`);
+    const server = httpServer.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 Backend running on port ${PORT} (${NODE_ENV})`);
     });
 
     // Graceful shutdown

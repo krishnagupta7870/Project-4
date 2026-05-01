@@ -51,7 +51,7 @@ export default function SellerPanel() {
         if (!token) return;
 
         const res = await fetch(
-          "http://localhost:5000/api/vendor/verification/status",
+          "/api/vendor/verification/status",
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -83,7 +83,7 @@ export default function SellerPanel() {
   const handleKycSubmit = async (formData) => {
     try {
       const token = localStorage.getItem("token");
-      await fetch("http://localhost:5000/api/vendor/verification/submit", {
+      await fetch("/api/vendor/verification/submit", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`

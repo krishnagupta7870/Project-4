@@ -76,7 +76,7 @@ export default function SellerApproval() {
         // Let's assume standard structure for now.
     }
     
-    return `http://localhost:5000/${relativePath}`; 
+    return `/${relativePath}`; 
     // In production, use environment variable for backend URL
   };
 

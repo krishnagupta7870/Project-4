@@ -260,7 +260,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
     try {
       const uploadData = new FormData();
       files.forEach((file) => uploadData.append("images", file));
-      const res = await axios.post("http://localhost:5000/api/upload", uploadData);
+      const res = await axios.post("/api/upload", uploadData);
 
       const urls = Array.isArray(res.data) ? res.data : [];
       const newImages = [...formData.images, ...urls];
@@ -303,7 +303,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
     // Start analysis and store promise
     console.log("Starting background AI analysis...");
     aiPromiseRef.current = axios.post(
-      "http://localhost:5000/api/ai/analyze",
+      "/api/ai/analyze",
       { imagePaths },
       { headers: { Authorization: `Bearer ${token}` } }
     ).then(res => res.data).catch(err => {
@@ -364,7 +364,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
           .slice(0, 4);
 
         const res = await axios.post(
-          "http://localhost:5000/api/ai/analyze",
+          "/api/ai/analyze",
           { imagePaths },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -438,8 +438,8 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
     try {
       const token = localStorage.getItem("token");
       const url = effectiveInitialData
-        ? `http://localhost:5000/api/products/${effectiveInitialData._id}`
-        : "http://localhost:5000/api/products";
+        ? `/api/products/${effectiveInitialData._id}`
+        : "/api/products";
       const method = effectiveInitialData ? "put" : "post";
 
       const dataToSubmit = formDataOverride ? { ...formDataOverride } : { ...formData };
@@ -607,7 +607,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
           {formData.images.map((img, index) => (
             <div key={index} className={`image-card ${index === 0 ? 'cover-image' : ''}`}>
               <img
-                src={img.startsWith('http') ? img : `http://localhost:5000${img}`}
+                src={img.startsWith('http') ? img : `${img}`}
                 alt={`Product ${index}`}
               />
               {index === 0 && <div className="cover-badge">Cover</div>}
@@ -904,7 +904,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
         <div className="preview-image">
           {formData.images.length > 0 ? (
             <img
-              src={formData.images[0].startsWith('http') ? formData.images[0] : `http://localhost:5000${formData.images[0]}`}
+              src={formData.images[0].startsWith('http') ? formData.images[0] : `${formData.images[0]}`}
               alt="Preview"
             />
           ) : (

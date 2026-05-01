@@ -15,8 +15,8 @@ export function LogoProvider({ children }) {
          let src = data.logo;
          // If it starts with /uploads, it's relative to backend root
          if (src.startsWith("/uploads")) {
-             // API_BASE_URL is http://localhost:5000/api
-             // We need http://localhost:5000
+             // API_BASE_URL is /api
+             // We need 
              const baseUrl = API_BASE_URL.replace("/api", "");
              src = `${baseUrl}${src}`;
          }

@@ -34,7 +34,7 @@ export default function VerifySeller() {
           return;
         }
 
-        const res = await fetch("http://localhost:5000/api/vendor/verification/status", {
+        const res = await fetch("/api/vendor/verification/status", {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -96,7 +96,7 @@ export default function VerifySeller() {
         data.append("docBack", form.docBack);
       }
 
-      const res = await fetch("http://localhost:5000/api/vendor/verification/submit", {
+      const res = await fetch("/api/vendor/verification/submit", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: data

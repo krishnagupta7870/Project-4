@@ -61,7 +61,7 @@ const ProductList = () => {
   const getImageSrc = (img) => {
     if (!img) return "/placeholder.jpg";
     if (img.startsWith("http")) return img;
-    return `http://localhost:5000${img}`;
+    return `${img}`;
   };
 
   const getStatusBadge = (status) => {

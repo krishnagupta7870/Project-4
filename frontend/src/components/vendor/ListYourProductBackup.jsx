@@ -289,7 +289,7 @@ export default function ListYourProduct({ isEmbedded, onCancel, onSuccess, initi
               {formData.images.map((img, index) => (
                 <div key={index} className="image-preview">
                   <img
-                    src={img.startsWith('http') ? img : `http://localhost:5000${img}`}
+                    src={img.startsWith('http') ? img : `${img}`}
                     alt={`Product ${index}`}
                   />
                   <button
