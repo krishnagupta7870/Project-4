@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../../utils/api";
+import api, { API_ORIGIN } from "../../utils/api";
 import { CheckCircle, XCircle, Eye, X } from "lucide-react";
 
 export default function SellerApproval() {
@@ -76,7 +76,7 @@ export default function SellerApproval() {
         // Let's assume standard structure for now.
     }
     
-    return `/${relativePath}`; 
+    return `${API_ORIGIN}/${relativePath}`; 
     // In production, use environment variable for backend URL
   };
 

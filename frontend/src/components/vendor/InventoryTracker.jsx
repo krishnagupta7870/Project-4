@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../../utils/api";
+import api, { API_ORIGIN } from "../../utils/api";
 import { Search, MoreVertical, Edit, Trash2, RefreshCw, Calendar, Eye, CheckCircle, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 

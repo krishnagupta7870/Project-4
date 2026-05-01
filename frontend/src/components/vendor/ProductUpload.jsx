@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../utils/api";
+import api, { API_ORIGIN } from "../../utils/api";
 import { Search, Pencil, Eye, Trash2, Plus, ArrowUpDown, ArrowUp, ArrowDown, Clock } from "lucide-react";
 import BoostModal from "./BoostModal";
 

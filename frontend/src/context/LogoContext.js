@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import api, { API_BASE_URL } from "../utils/api";
+import api, { API_BASE_URL, API_ORIGIN } from "../utils/api";
 
 const LogoContext = createContext();
 
@@ -15,10 +15,7 @@ export function LogoProvider({ children }) {
          let src = data.logo;
          // If it starts with /uploads, it's relative to backend root
          if (src.startsWith("/uploads")) {
-             // API_BASE_URL is /api
-             // We need 
-             const baseUrl = API_BASE_URL.replace("/api", "");
-             src = `${baseUrl}${src}`;
+             src = `${API_ORIGIN}${src}`;
          }
          setLogo(src);
       } else {

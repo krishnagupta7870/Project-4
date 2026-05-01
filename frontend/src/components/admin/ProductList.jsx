@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Pencil, Eye, Trash2, Search, ArrowUpDown, ArrowUp, ArrowDown, Clock } from 'lucide-react';
-import api from '../../utils/api';
+import api, { API_ORIGIN } from '../../utils/api';
 import ListYourProduct from '../vendor/ListYourProduct';
 
 const ProductList = () => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_ORIGIN } from "../utils/api";
 import { useNavigate } from "react-router-dom";
 import "../styles/seller.css";
 
@@ -34,7 +35,7 @@ export default function VerifySeller() {
           return;
         }
 
-        const res = await fetch("/api/vendor/verification/status", {
+        const res = await fetch(`${API_ORIGIN}/api/vendor/verification/status`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -96,7 +97,7 @@ export default function VerifySeller() {
         data.append("docBack", form.docBack);
       }
 
-      const res = await fetch("/api/vendor/verification/submit", {
+      const res = await fetch(`${API_ORIGIN}/api/vendor/verification/submit`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: data

@@ -13,6 +13,7 @@ import SellerFeedback from "../components/vendor/SellerFeedback";
 import SellerVerificationModal from "../components/vendor/SellerVerificationModal";
 import NotificationsBell from "../components/common/NotificationsBell";
 
+import { API_ORIGIN } from "../utils/api";
 import { useLogo } from "../context/LogoContext";
 
 export default function SellerPanel() {
@@ -51,7 +52,7 @@ export default function SellerPanel() {
         if (!token) return;
 
         const res = await fetch(
-          "/api/vendor/verification/status",
+          `${API_ORIGIN}/api/vendor/verification/status`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -83,7 +84,7 @@ export default function SellerPanel() {
   const handleKycSubmit = async (formData) => {
     try {
       const token = localStorage.getItem("token");
-      await fetch("/api/vendor/verification/submit", {
+      await fetch(`${API_ORIGIN}/api/vendor/verification/submit`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`

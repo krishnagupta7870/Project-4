@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import LocationMapModal from "../common/LocationMapModal";
 import axios from "axios";
-import api from "../../utils/api";
+import api, { API_ORIGIN } from "../../utils/api";
 import PaymentModal from "./PaymentModal";
 import "./ListYourProduct.css";
 
