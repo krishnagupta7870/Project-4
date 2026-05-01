@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../utils/api";
 import { useLogo } from "../../context/LogoContext";
 
-const DEFAULT_LOGO = "/images/logos/logo.svg";
+const DEFAULT_LOGO = "/api/images/logos/logo.svg";
 
 export default function ManageLogo() {
   const { logo: globalLogo, fetchLogo } = useLogo();

@@ -98,7 +98,7 @@ const ProductList = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
-      await api.delete(`/products/${id}`);
+      await api.delete(`/api/products/${id}`);
       setProducts(products.filter(p => p._id !== id));
     } catch (err) {
       console.error("Failed to delete", err);

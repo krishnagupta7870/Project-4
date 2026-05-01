@@ -66,7 +66,7 @@ export default function CategoryManagement() {
 
     const fetchSubcategories = async (categoryId) => {
         try {
-            const { data } = await api.get(`/subcategories?categoryId=${categoryId}`);
+            const { data } = await api.get(`/api/subcategories?categoryId=${categoryId}`);
             setSubcategories(data);
         } catch (err) {
             console.error(err);
@@ -115,7 +115,7 @@ export default function CategoryManagement() {
             fd.append("name", editName.trim());
             if (editFile) fd.append("image", editFile);
 
-            await api.put(`/categories/${id}`, fd, {
+            await api.put(`/api/categories/${id}`, fd, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
 
@@ -130,7 +130,7 @@ export default function CategoryManagement() {
     const handleUpdateSub = async (subId) => {
         if (!editSubName.trim()) return;
         try {
-            await api.put(`/subcategories/${subId}`, { name: editSubName.trim() });
+            await api.put(`/api/subcategories/${subId}`, { name: editSubName.trim() });
             setEditingSubId(null);
             fetchSubcategories(selectedCategory._id);
             showToast("Subcategory updated");
@@ -153,7 +153,7 @@ export default function CategoryManagement() {
                 updatedFields.push(fieldData);
             }
 
-            await api.put(`/subcategories/${activeSubForFields._id}`, { fields: updatedFields });
+            await api.put(`/api/subcategories/${activeSubForFields._id}`, { fields: updatedFields });
             showToast(isEditingField ? "Field updated" : "Field added");
             setShowFieldModal(false);
             fetchSubcategories(selectedCategory._id);
@@ -167,7 +167,7 @@ export default function CategoryManagement() {
         if (!window.confirm('Remove field?')) return;
         try {
             const fields = sub.fields.filter((_, i) => i !== fieldIdx);
-            await api.put(`/subcategories/${sub._id}`, { fields });
+            await api.put(`/api/subcategories/${sub._id}`, { fields });
             fetchSubcategories(selectedCategory._id);
             showToast('Field removed');
             localStorage.removeItem("categoriesCache");
@@ -206,7 +206,7 @@ export default function CategoryManagement() {
         try {
             setLoading(true);
             const updatedSub = { ...sub, fields };
-            const { data } = await api.put(`/subcategories/${sub._id}`, updatedSub);
+            const { data } = await api.put(`/api/subcategories/${sub._id}`, updatedSub);
 
             // Update local state
             setSubcategories(prev => prev.map(s => s._id === data._id ? data : s));
@@ -240,8 +240,8 @@ export default function CategoryManagement() {
             setLoading(true);
             // We only need to swap order values if they exist, or set them sequentially
             // Simple approach: set order to index for both
-            await api.put(`/categories/${targetCat._id}`, { order: newIndex });
-            await api.put(`/categories/${adjacentCat._id}`, { order: index });
+            await api.put(`/api/categories/${targetCat._id}`, { order: newIndex });
+            await api.put(`/api/categories/${adjacentCat._id}`, { order: index });
 
             fetchCategories();
             showToast("Category reordered");
@@ -268,8 +268,8 @@ export default function CategoryManagement() {
 
         try {
             setLoading(true);
-            await api.put(`/subcategories/${targetSub._id}`, { order: newIndex });
-            await api.put(`/subcategories/${adjacentSub._id}`, { order: index });
+            await api.put(`/api/subcategories/${targetSub._id}`, { order: newIndex });
+            await api.put(`/api/subcategories/${adjacentSub._id}`, { order: index });
 
             fetchSubcategories(selectedCategory._id);
             showToast("Subcategory reordered");
@@ -380,7 +380,7 @@ export default function CategoryManagement() {
                                         </div>
                                         <div className="cat-ops">
                                             <button onClick={(e) => { e.stopPropagation(); setEditingCategory(cat._id); setEditName(cat.name); }}><Edit2 size={12} /></button>
-                                            <button onClick={(e) => { e.stopPropagation(); if (window.confirm('Delete?')) api.delete(`/categories/${cat._id}`).then(() => { fetchCategories(); setSelectedCategory(null); showToast('Category deleted'); }); }} className="del"><Trash2 size={12} /></button>
+                                            <button onClick={(e) => { e.stopPropagation(); if (window.confirm('Delete?')) api.delete(`/api/categories/${cat._id}`).then(() => { fetchCategories(); setSelectedCategory(null); showToast('Category deleted'); }); }} className="del"><Trash2 size={12} /></button>
                                         </div>
                                     </div>
                                 )}
@@ -433,7 +433,7 @@ export default function CategoryManagement() {
                                             <div className="panel-actions">
                                                 {editingSubId !== sub._id && <button onClick={() => { setEditingSubId(sub._id); setEditSubName(sub.name); }} title="Rename"><Edit2 size={14} /></button>}
                                                 <button onClick={() => { setActiveSubForFields(sub); setIsEditingField(false); setShowFieldModal(true); setNewField({ name: "", label: "", type: "text", options: "", required: false, placeholder: "" }); }} className="btn-add-spec"><Plus size={14} /> Specification</button>
-                                                <button onClick={() => { if (window.confirm('Delete?')) api.delete(`/subcategories/${sub._id}`).then(() => { fetchSubcategories(selectedCategory._id); showToast('Subcategory deleted'); }); }} className="btn-del-sub"><Trash2 size={14} /></button>
+                                                <button onClick={() => { if (window.confirm('Delete?')) api.delete(`/api/subcategories/${sub._id}`).then(() => { fetchSubcategories(selectedCategory._id); showToast('Subcategory deleted'); }); }} className="btn-del-sub"><Trash2 size={14} /></button>
                                             </div>
                                         </div>
 

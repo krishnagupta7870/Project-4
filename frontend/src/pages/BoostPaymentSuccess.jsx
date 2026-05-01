@@ -17,7 +17,7 @@ export default function BoostPaymentSuccess() {
         return;
       }
       try {
-        await api.post(`/products/${productId}/boost`, {
+        await api.post(`/api/products/${productId}/boost`, {
           hours,
           amount,
           provider: "stripe"

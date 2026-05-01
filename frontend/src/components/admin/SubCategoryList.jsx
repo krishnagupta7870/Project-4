@@ -50,10 +50,10 @@ export default function SubCategoryList({ onAdd = () => {} }) {
     setSaving(true);
     const id = editing._id || editing.id;
     try {
-      await api.put(`/admin/subcategories/${id}`, { name: editName });
+      await api.put(`/api/admin/subcategories/${id}`, { name: editName });
     } catch {
       try {
-        await api.put(`/subcategories/${id}`, { name: editName });
+        await api.put(`/api/subcategories/${id}`, { name: editName });
       } catch {
         setSaving(false);
         return;
@@ -66,10 +66,10 @@ export default function SubCategoryList({ onAdd = () => {} }) {
 
   const handleDelete = async (id) => {
     try {
-      await api.delete(`/admin/subcategories/${id}`);
+      await api.delete(`/api/admin/subcategories/${id}`);
     } catch {
       try {
-        await api.delete(`/subcategories/${id}`);
+        await api.delete(`/api/subcategories/${id}`);
       } catch {}
     }
     await fetchAll();

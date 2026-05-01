@@ -322,7 +322,7 @@ const Home = () => {
     setSaved(nextSaved); // Optimistic update
 
     try {
-      const { data } = await api.post(`/wishlist/${id}`);
+      const { data } = await api.post(`/api/wishlist/${id}`);
       setSaved(data.map(String));
     } catch (err) {
       showToast("Login required to save items", "error");

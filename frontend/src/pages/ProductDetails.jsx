@@ -58,7 +58,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await api.get(`/products/${id}`);
+        const { data } = await api.get(`/api/products/${id}`);
         setProduct(data);
         setLikesCount(data.likes?.length || 0);
 
@@ -86,7 +86,7 @@ const ProductDetails = () => {
 
     const viewTimeout = setTimeout(async () => {
       try {
-        await api.put(`/products/${id}/view`);
+        await api.put(`/api/products/${id}/view`);
       } catch (err) {
         console.error("Failed to track view", err);
       }
@@ -123,7 +123,7 @@ const ProductDetails = () => {
       try {
         const sellerId = product.seller?._id || product.seller?.id;
         if (!sellerId) return;
-        const { data } = await api.get(`/users/${sellerId}/profile`);
+        const { data } = await api.get(`/api/users/${sellerId}/profile`);
         setSellerData(data);
       } catch (err) {
         console.error("Failed to fetch seller data", err);
@@ -252,7 +252,7 @@ const ProductDetails = () => {
     }
 
     try {
-      const { data } = await api.put(`/products/${id}/like`);
+      const { data } = await api.put(`/api/products/${id}/like`);
       setIsLiked(data.liked);
       setLikesCount(data.likes);
     } catch (err) {
@@ -565,7 +565,7 @@ const ProductDetails = () => {
                 try {
                   const sellerId = product.seller?._id || product.seller?.id;
                   if (!sellerId) return;
-                  const res = await api.post(`/chat/conversations`, {
+                  const res = await api.post(`/api/chat/conversations`, {
                     participantId: sellerId,
                     product: product._id,
                     title: product.name || ""

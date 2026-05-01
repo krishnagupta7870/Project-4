@@ -1,12 +1,12 @@
 import api from "./api";
 
 export async function fetchSimilarProducts(productId) {
-  const { data } = await api.get(`/recommend/similar-products/${productId}`);
+  const { data } = await api.get(`/api/recommend/similar-products/${productId}`);
   return data;
 }
 
 export async function fetchUserRecommendations(lat = null, lng = null) {
-  let url = "/recommend/for-user";
+  let url = "/api/recommend/for-user";
   if (lat && lng) {
     url += `?lat=${lat}&lng=${lng}`;
   }

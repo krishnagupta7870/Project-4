@@ -96,7 +96,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
     const loadForEdit = async () => {
       if (!editId || initialData) return;
       try {
-        const { data } = await api.get(`/products/${editId}`);
+        const { data } = await api.get(`/api/products/${editId}`);
         setLoadedInitialData(data);
       } catch (err) {
         console.error("Failed to load product for edit", err);

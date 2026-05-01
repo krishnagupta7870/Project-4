@@ -17,7 +17,7 @@ export default function UserManagement() {
 
   const toggleBlock = async (id) => {
     try {
-        await api.put(`/admin/block/${id}`);
+        await api.put(`/api/admin/block/${id}`);
         fetchUsers();
     } catch (e) {
         // Optimistic update for demo

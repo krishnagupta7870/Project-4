@@ -28,7 +28,7 @@ export default function SellerApproval() {
   const approveSeller = async (id) => {
     if (!window.confirm("Are you sure you want to approve this seller?")) return;
     try {
-        await api.put(`/admin/verifications/${id}/approve`, {});
+        await api.put(`/api/admin/verifications/${id}/approve`, {});
         // Refresh list
         fetchSellers();
         setSelectedSeller(null); // Close modal if open
@@ -42,7 +42,7 @@ export default function SellerApproval() {
     if (!reason) return;
 
     try {
-        await api.put(`/admin/verifications/${id}/reject`, { reason });
+        await api.put(`/api/admin/verifications/${id}/reject`, { reason });
         fetchSellers();
         setSelectedSeller(null);
     } catch (e) {

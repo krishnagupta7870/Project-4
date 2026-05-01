@@ -48,12 +48,12 @@ export default function CategoryList({ onAdd = () => {} }) {
 
   const handleDelete = async (id) => {
     try {
-      await api.delete(`/admin/categories/${id}`);
+      await api.delete(`/api/admin/categories/${id}`);
       await fetchCategories();
       return;
     } catch (e1) {}
     try {
-      await api.delete(`/categories/${id}`);
+      await api.delete(`/api/categories/${id}`);
       await fetchCategories();
     } catch (e2) {}
   };
@@ -86,7 +86,7 @@ export default function CategoryList({ onAdd = () => {} }) {
       const fd = new FormData();
       if (editName) fd.append("name", editName);
       if (editFile) fd.append("image", editFile);
-      await api.put(`/admin/categories/${id}`, fd, {
+      await api.put(`/api/admin/categories/${id}`, fd, {
         headers: { "Content-Type": "multipart/form-data" }
       });
     } catch (e1) {
@@ -94,7 +94,7 @@ export default function CategoryList({ onAdd = () => {} }) {
         const fd = new FormData();
         if (editName) fd.append("name", editName);
         if (editFile) fd.append("image", editFile);
-        await api.put(`/categories/${id}`, fd, {
+        await api.put(`/api/categories/${id}`, fd, {
           headers: { "Content-Type": "multipart/form-data" }
         });
       } catch (e2) {

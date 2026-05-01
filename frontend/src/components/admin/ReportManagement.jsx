@@ -26,7 +26,7 @@ const ReportManagement = () => {
 
     const handleResolve = async (id, action) => {
         try {
-            await api.put(`/admin/reports/${id}/resolve`, { action, adminComment });
+            await api.put(`/api/admin/reports/${id}/resolve`, { action, adminComment });
             toast.success(`Report ${action}`);
             setAdminComment(""); // Reset comment
             if (selectedReport && selectedReport._id === id) {

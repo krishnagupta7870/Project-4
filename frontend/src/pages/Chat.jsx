@@ -91,7 +91,7 @@ export default function Chat() {
     async function loadMessages() {
       try {
         setLoading(true);
-        const res = await api.get(`/chat/conversations/${activeId}/messages`);
+        const res = await api.get(`/api/chat/conversations/${activeId}/messages`);
         if (!mounted) return;
         setMessages(res.data || []);
       } catch {
@@ -109,7 +109,7 @@ export default function Chat() {
     async function loadConvo() {
       if (!activeId) return;
       try {
-        const res = await api.get(`/chat/conversations/${activeId}`);
+        const res = await api.get(`/api/chat/conversations/${activeId}`);
         if (!mounted) return;
         setActiveConvo(res.data || null);
       } catch { }
@@ -124,7 +124,7 @@ export default function Chat() {
       const id = activeConvo?.product?._id || activeConvo?.product;
       if (!id) { setProductInfo(null); return; }
       try {
-        const res = await api.get(`/products/${id}`);
+        const res = await api.get(`/api/products/${id}`);
         if (!mounted) return;
         setProductInfo(res.data || null);
       } catch {
@@ -139,7 +139,7 @@ export default function Chat() {
     async function markRead() {
       if (!activeId) return;
       try {
-        await api.put(`/chat/conversations/${activeId}/read`);
+        await api.put(`/api/chat/conversations/${activeId}/read`);
         setConversations(prev => prev.map(c =>
           c._id === activeId ? {
             ...c,
@@ -189,7 +189,7 @@ export default function Chat() {
     try {
       const sellerId = activeConvo?.product?.seller;
       if (!sellerId) return;
-      const res = await api.get(`/products/by-seller/${sellerId}`);
+      const res = await api.get(`/api/products/by-seller/${sellerId}`);
       setSellerItems(res.data || []);
       setShowSellerItems(true);
     } catch { }
@@ -198,7 +198,7 @@ export default function Chat() {
   async function leaveConversation() {
     if (!activeId) return;
     try {
-      await api.delete(`/chat/conversations/${activeId}/leave`);
+      await api.delete(`/api/chat/conversations/${activeId}/leave`);
       setShowOptions(false);
       // Refresh list
       const res = await api.get("/api/chat/conversations");
@@ -468,7 +468,7 @@ export default function Chat() {
         )}
         {showOptions && (
           <div className="dm-options-menu">
-            <button className="dm-options-item" onClick={async () => { try { await api.put(`/chat/conversations/${activeId}/read`); } catch { } setShowOptions(false); }}>Mark as read</button>
+            <button className="dm-options-item" onClick={async () => { try { await api.put(`/api/chat/conversations/${activeId}/read`); } catch { } setShowOptions(false); }}>Mark as read</button>
             <button className="dm-options-item danger" onClick={leaveConversation}>Delete conversation</button>
           </div>
         )}

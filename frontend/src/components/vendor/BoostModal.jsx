@@ -32,7 +32,7 @@ export default function BoostModal({ product, onClose, onBoosted }) {
     setError("");
     try {
       if (provider === "stripe") {
-        const { data } = await api.post(`/payment/boost/stripe-session`, {
+        const { data } = await api.post(`/api/payment/boost/stripe-session`, {
           productId: product._id,
           hours: selected.hours,
           amount: selected.price
@@ -48,7 +48,7 @@ export default function BoostModal({ product, onClose, onBoosted }) {
         setError("Failed to create Stripe session");
       } else if (provider === "khalti") {
         const origin = window.location.origin;
-        const { data } = await api.post(`/payment/initiate-khalti`, {
+        const { data } = await api.post(`/api/payment/initiate-khalti`, {
           amount: selected.price * 100,
           purchase_order_id: product._id,
           purchase_order_name: `Boost: ${product.name}`,
@@ -61,7 +61,7 @@ export default function BoostModal({ product, onClose, onBoosted }) {
         }
         setError("Failed to initiate Khalti payment");
       } else {
-        const { data } = await api.post(`/products/${product._id}/boost`, {
+        const { data } = await api.post(`/api/products/${product._id}/boost`, {
           hours: selected.hours,
           amount: selected.price,
           provider

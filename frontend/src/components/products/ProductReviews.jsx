@@ -26,7 +26,7 @@ export default function ProductReviews({ productId }) {
 
   const fetchReviews = async () => {
     try {
-      const { data } = await api.get(`/reviews/product/${productId}`);
+      const { data } = await api.get(`/api/reviews/product/${productId}`);
       setReviews(data);
     } catch (err) {
       console.error("Failed to fetch reviews", err);
@@ -37,7 +37,7 @@ export default function ProductReviews({ productId }) {
 
   const checkEligibility = async () => {
     try {
-      const { data } = await api.get(`/reviews/check-eligibility/${productId}`);
+      const { data } = await api.get(`/api/reviews/check-eligibility/${productId}`);
       setCanReview(data.canReview);
       setEligibilityMessage(data.message || "");
     } catch (err) {

@@ -239,7 +239,7 @@ export default function ListYourProduct({ isEmbedded, onCancel, onSuccess, initi
 
     try {
       if (initialData && initialData._id) {
-        await api.put(`/products/${initialData._id}`, payload);
+        await api.put(`/api/products/${initialData._id}`, payload);
       } else {
         await api.post("/api/products", payload);
       }

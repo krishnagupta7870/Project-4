@@ -15,7 +15,7 @@ export default function SellerDashboardPage() {
           const userData = JSON.parse(userStr);
           setUser(userData);
 
-          const { data } = await api.get(`/products`);
+          const { data } = await api.get(`/api/products`);
           const myProducts = data.filter(p => {
             const sellerId = p.seller?._id || p.seller;
             return sellerId === userData._id;
@@ -24,7 +24,7 @@ export default function SellerDashboardPage() {
 
           // Fetch fresh user data with trustScore and sellerStats
           try {
-            const profileRes = await api.get(`/users/${userData._id}/profile`);
+            const profileRes = await api.get(`/api/users/${userData._id}/profile`);
             // Update user state with fresh data including trustScore
             setUser(prevUser => ({
               ...prevUser,

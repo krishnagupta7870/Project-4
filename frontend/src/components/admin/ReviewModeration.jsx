@@ -9,7 +9,7 @@ export default function ReviewModeration() {
   }, []);
 
   const remove = async (id) => {
-    await api.delete(`/admin/reviews/${id}`);
+    await api.delete(`/api/admin/reviews/${id}`);
     setReviews(reviews.filter(r => r._id !== id));
   };
 

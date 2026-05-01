@@ -3,7 +3,7 @@ import api, { API_BASE_URL, API_ORIGIN } from "../utils/api";
 
 const LogoContext = createContext();
 
-const DEFAULT_LOGO = "/images/logos/logo.svg";
+const DEFAULT_LOGO = "/api/images/logos/logo.svg";
 
 export function LogoProvider({ children }) {
   const [logo, setLogo] = useState(DEFAULT_LOGO);

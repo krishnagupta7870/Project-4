@@ -50,7 +50,7 @@ export default function SellerProfile() {
     let mounted = true;
     async function fetchProfile() {
       try {
-        const res = await api.get(`/users/${id}/profile`);
+        const res = await api.get(`/api/users/${id}/profile`);
         if (!mounted) return;
         setData(res.data);
       } catch {
@@ -106,12 +106,12 @@ export default function SellerProfile() {
     if (!editingReview) return;
     try {
       setSubmittingEdit(true);
-      await api.put(`/reviews/${editingReview._id}`, {
+      await api.put(`/api/reviews/${editingReview._id}`, {
         rating: editRating,
         comment: editComment
       });
       // Refresh data
-      const res = await api.get(`/users/${id}/profile`);
+      const res = await api.get(`/api/users/${id}/profile`);
       setData(res.data);
       setShowEditModal(false);
       setEditingReview(null);
@@ -126,9 +126,9 @@ export default function SellerProfile() {
   const handleDeleteReview = async (reviewId) => {
     if (!window.confirm("Are you sure you want to delete this review?")) return;
     try {
-      await api.delete(`/reviews/${reviewId}`);
+      await api.delete(`/api/reviews/${reviewId}`);
       // Refresh data
-      const res = await api.get(`/users/${id}/profile`);
+      const res = await api.get(`/api/users/${id}/profile`);
       setData(res.data);
     } catch (err) {
       console.error(err);

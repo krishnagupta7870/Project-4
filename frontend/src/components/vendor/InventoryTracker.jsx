@@ -52,7 +52,7 @@ export default function InventoryTracker() {
             if (!userStr) return;
             const user = JSON.parse(userStr);
 
-            const { data } = await api.get(`/products`);
+            const { data } = await api.get(`/api/products`);
             // Filter for my products
             const myProducts = data.filter(p => {
                 const sellerId = p.seller?._id || p.seller;
@@ -77,7 +77,7 @@ export default function InventoryTracker() {
             // Background update for expired items
             if (productsToUpdate.length > 0) {
                 await Promise.all(productsToUpdate.map(id =>
-                    api.put(`/products/${id}`, { status: 'expired' })
+                    api.put(`/api/products/${id}`, { status: 'expired' })
                 ));
             }
 
@@ -93,7 +93,7 @@ export default function InventoryTracker() {
 
     const updateProductStatus = async (id, status, extraData = {}) => {
         try {
-            await api.put(`/products/${id}`, { status, ...extraData });
+            await api.put(`/api/products/${id}`, { status, ...extraData });
             fetchInventory();
             setActionOpenId(null);
             closeModals();
@@ -157,14 +157,14 @@ export default function InventoryTracker() {
         try {
             if (quantity < selectedProduct.stock) {
                 // Partial Sale
-                await api.put(`/products/${selectedProduct._id}`, {
+                await api.put(`/api/products/${selectedProduct._id}`, {
                     stock: selectedProduct.stock - quantity,
                     sales: (selectedProduct.sales || 0) + quantity
                 });
                 alert(`Sold ${quantity} items. Remaining stock: ${selectedProduct.stock - quantity}`);
             } else {
                 // Full Sale (Stock becomes 0 -> Status 'sold')
-                await api.put(`/products/${selectedProduct._id}`, {
+                await api.put(`/api/products/${selectedProduct._id}`, {
                     status: 'sold',
                     stock: 0,
                     sales: (selectedProduct.sales || 0) + quantity,
@@ -183,7 +183,7 @@ export default function InventoryTracker() {
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this product?")) return;
         try {
-            await api.delete(`/products/${id}`);
+            await api.delete(`/api/products/${id}`);
             setProducts(products.filter(p => p._id !== id));
         } catch (err) {
             console.error(err);

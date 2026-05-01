@@ -86,7 +86,7 @@ export default function NotificationsBell() {
   const onItemClick = async (n) => {
     if (!n.read) {
       try {
-        await api.put(`/ notifications / ${n._id}/read`);
+        await api.put(`/api/ notifications / ${n._id}/read`);
         setItems(items.map(i => (i._id === n._id ? { ...i, read: true } : i)));
       } catch (err) {
         console.error("Failed to mark as read", err);

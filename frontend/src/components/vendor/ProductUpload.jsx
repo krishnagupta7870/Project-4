@@ -28,7 +28,7 @@ export default function ProductUpload({
 
                 const user = JSON.parse(userStr);
                 // Fetch all products (backend doesn't filter by seller yet, so we filter here)
-                const { data } = await api.get(`/products`);
+                const { data } = await api.get(`/api/products`);
 
                 // Filter for current seller
                 const myProducts = data.filter(p => {
@@ -169,7 +169,7 @@ export default function ProductUpload({
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this product?")) return;
         try {
-            await api.delete(`/products/${id}`);
+            await api.delete(`/api/products/${id}`);
             setProducts(products.filter(p => p._id !== id));
         } catch (err) {
             console.error("Failed to delete", err);
@@ -359,7 +359,7 @@ export default function ProductUpload({
                                 const userStr = localStorage.getItem("user");
                                 if (!userStr) return;
                                 const user = JSON.parse(userStr);
-                                const { data } = await api.get(`/products`);
+                                const { data } = await api.get(`/api/products`);
                                 const myProducts = data.filter(p => {
                                     const sellerId = p.seller?._id || p.seller;
                                     return sellerId === user._id;

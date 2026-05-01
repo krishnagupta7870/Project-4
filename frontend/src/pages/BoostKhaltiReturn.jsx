@@ -19,9 +19,9 @@ export default function BoostKhaltiReturn() {
       }
       try {
         if (pidx) {
-          await api.post(`/payment/verify-khalti`, { pidx, amount });
+          await api.post(`/api/payment/verify-khalti`, { pidx, amount });
         }
-        await api.post(`/products/${productId}/boost`, {
+        await api.post(`/api/products/${productId}/boost`, {
           hours,
           amount,
           provider: "khalti"
