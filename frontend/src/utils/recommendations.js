@@ -15,6 +15,6 @@ export async function fetchUserRecommendations(lat = null, lng = null) {
 }
 
 export async function fetchTrendingProducts() {
-  const { data } = await api.get("/recommend/trending");
+  const { data } = await api.get("/api/recommend/trending");
   return data;
 }

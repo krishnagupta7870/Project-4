@@ -217,9 +217,9 @@ const Home = () => {
     async function load() {
       try {
         const [catRes, prodRes, boostedRes] = await Promise.all([
-          api.get("/categories"),
-          api.get("/products"),
-          api.get("/products/boosted/list"),
+          api.get("/api/categories"),
+          api.get("/api/products"),
+          api.get("/api/products/boosted/list"),
         ]);
         if (!mounted) return;
         setCats(catRes.data || []);
@@ -264,7 +264,7 @@ const Home = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      api.get("/wishlist")
+      api.get("/api/wishlist")
         .then(res => setSaved(res.data || []))
         .catch(() => { });
     }

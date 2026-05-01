@@ -19,7 +19,7 @@ export default function ManageBoosts() {
   useEffect(() => {
     const load = async () => {
       try {
-        const { data } = await api.get("/admin/settings/boost-packages");
+        const { data } = await api.get("/api/admin/settings/boost-packages");
         setPackages(Array.isArray(data) ? data : []);
       } catch {
         showToast("Failed to load boost packages", "error");
@@ -50,7 +50,7 @@ export default function ManageBoosts() {
         hours: Number(p.hours),
         price: Number(p.price)
       })).filter(p => p.hours > 0 && p.price >= 0);
-      await api.put("/admin/settings/boost-packages", { packages: sanitized });
+      await api.put("/api/admin/settings/boost-packages", { packages: sanitized });
       showToast("Boost packages saved");
     } catch (err) {
       showToast(err.response?.data?.message || "Save failed", "error");

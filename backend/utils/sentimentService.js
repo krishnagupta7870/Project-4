@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SENTIMENT_API_URL = 'http://127.0.0.1:5001/analyze_sentiment';
+const SENTIMENT_API_URL = (process.env.RECOMMENDER_SERVICE_URL || 'http://127.0.0.1:5002') + '/analyze_sentiment';
 
 export const analyzeSentiment = async (text, rating = null) => {
     try {

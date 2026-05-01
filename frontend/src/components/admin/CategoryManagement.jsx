@@ -51,7 +51,7 @@ export default function CategoryManagement() {
 
     const fetchCategories = useCallback(async () => {
         try {
-            const { data } = await api.get("/categories");
+            const { data } = await api.get("/api/categories");
             setCategories(data);
             setLoading(false);
         } catch (err) {
@@ -77,7 +77,7 @@ export default function CategoryManagement() {
         e.preventDefault();
         if (!newCategoryName.trim()) return;
         try {
-            await api.post("/categories", { name: newCategoryName });
+            await api.post("/api/categories", { name: newCategoryName });
             setNewCategoryName("");
             showToast("Category created successfully");
             fetchCategories();
@@ -97,7 +97,7 @@ export default function CategoryManagement() {
         e.preventDefault();
         if (!newSubCategoryName.trim() || !selectedCategory) return;
         try {
-            await api.post("/subcategories", {
+            await api.post("/api/subcategories", {
                 name: newSubCategoryName,
                 category: selectedCategory._id
             });
@@ -180,7 +180,7 @@ export default function CategoryManagement() {
         if (!window.confirm("Import categories from categories.js?")) return;
         setSeeding(true);
         try {
-            await api.post("/categories/seed", { categoriesData: categoryConfig });
+            await api.post("/api/categories/seed", { categoriesData: categoryConfig });
             showToast("Configuration imported successfully");
             fetchCategories();
             if (selectedCategory) fetchSubcategories(selectedCategory._id);
@@ -284,7 +284,7 @@ export default function CategoryManagement() {
         if (!window.confirm("WARNING: This will OVERWRITE your categories.js file with data from the database. Any manual code organization (like commonFields) will be lost. Proceed?")) return;
         setSyncing(true);
         try {
-            await api.post("/categories/sync-to-config");
+            await api.post("/api/categories/sync-to-config");
             showToast("Synced to categories.js file");
         } catch (err) {
             showToast("Sync failed", "error");

@@ -6,7 +6,7 @@ export default function UserManagement() {
 
   const fetchUsers = async () => {
     try {
-        const res = await api.get("/admin/users");
+        const res = await api.get("/api/admin/users");
         setUsers(res.data);
     } catch (e) {
         console.error("Failed to fetch users", e);

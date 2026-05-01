@@ -69,7 +69,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await api.get("/categories/full");
+        const { data } = await api.get("/api/categories/full");
         setCategoryStructure(data);
         setCategories(Object.keys(data));
       } catch (err) {
@@ -181,7 +181,7 @@ const ListYourProduct = ({ initialData, isEmbedded = false }) => {
   const verifyAndSubmit = async (pidx, restoredFormData) => {
     try {
       setLoading(true);
-      const { data } = await api.post("/payment/verify-khalti", { pidx });
+      const { data } = await api.post("/api/payment/verify-khalti", { pidx });
       if (data.success) {
         await submitProduct(data.paymentDetails, restoredFormData);
         showToast("Product listed successfully");

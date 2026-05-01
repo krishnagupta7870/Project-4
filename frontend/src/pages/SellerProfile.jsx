@@ -77,7 +77,7 @@ export default function SellerProfile() {
     }
     setSubmittingReport(true);
     try {
-      await api.post("/reports", {
+      await api.post("/api/reports", {
         targetId: data.user._id,
         reportType: "user",
         reason: reportReason,

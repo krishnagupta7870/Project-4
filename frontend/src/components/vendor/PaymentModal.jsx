@@ -19,7 +19,7 @@ const StripeForm = ({ fee, onSuccess, onError }) => {
     // Create PaymentIntent as soon as the component loads
     const createIntent = async () => {
       try {
-        const { data } = await api.post("/payment/create-payment-intent", { price: fee }); // Passing fee logic is handled in backend based on price, but here we might need to pass price or just fee amount if backend supports it. 
+        const { data } = await api.post("/api/payment/create-payment-intent", { price: fee }); // Passing fee logic is handled in backend based on price, but here we might need to pass price or just fee amount if backend supports it. 
         // Wait, backend expects 'price' to calculate fee.
         // Let's assume we pass the fee amount directly for simplicity or pass a mock price that results in that fee? 
         // Actually, backend logic: if price < 1000 -> 10. 
@@ -56,7 +56,7 @@ const StripeForm = ({ fee, onSuccess, onError }) => {
       if (result.paymentIntent.status === "succeeded") {
         // Verify and save to DB
         try {
-          const { data } = await api.post("/payment/confirm-stripe", {
+          const { data } = await api.post("/api/payment/confirm-stripe", {
             paymentIntentId: result.paymentIntent.id
           });
           onSuccess(data); // Pass full data including paymentId
@@ -96,7 +96,7 @@ const StripeSection = ({ productPrice, fee, onSuccess, onError }) => {
         const price = Number(productPrice);
         if (isNaN(price)) throw new Error("Invalid price");
 
-        const { data } = await api.post("/payment/create-payment-intent", { price });
+        const { data } = await api.post("/api/payment/create-payment-intent", { price });
         setClientSecret(data.clientSecret);
       } catch (err) {
         console.error(err);
@@ -127,7 +127,7 @@ const StripeSection = ({ productPrice, fee, onSuccess, onError }) => {
       if (result.paymentIntent.status === "succeeded") {
         // Verify and save to DB
         try {
-          const { data } = await api.post("/payment/confirm-stripe", {
+          const { data } = await api.post("/api/payment/confirm-stripe", {
             paymentIntentId: result.paymentIntent.id
           });
           onSuccess(data.paymentDetails);
@@ -192,7 +192,7 @@ const PaymentModal = ({ productPrice, onClose, onSuccess }) => {
       // For testing: Use 1000 paisa (Rs 10) or calculate from fee
       const amountPaisa = Math.round(fee * 100);
 
-      const { data } = await api.post("/payment/initiate-khalti", {
+      const { data } = await api.post("/api/payment/initiate-khalti", {
         amount: amountPaisa,
         purchase_order_id: "order_" + Date.now(),
         purchase_order_name: "Listing Fee",

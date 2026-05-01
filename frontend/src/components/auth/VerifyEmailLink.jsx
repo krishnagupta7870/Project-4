@@ -19,7 +19,7 @@ export default function VerifyEmailLink() {
 
     (async () => {
       try {
-        const { data } = await api.post('/auth/verify-email', { token, email });
+        const { data } = await api.post("/api/auth/verify-email", { token, email });
         setStatus(data?.message || 'Email verified successfully.');
         setTimeout(() => navigate('/login'), 1200);
       } catch (err) {

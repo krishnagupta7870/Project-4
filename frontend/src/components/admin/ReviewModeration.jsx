@@ -5,7 +5,7 @@ export default function ReviewModeration() {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    api.get("/admin/reviews").then(res => setReviews(res.data));
+    api.get("/api/admin/reviews").then(res => setReviews(res.data));
   }, []);
 
   const remove = async (id) => {

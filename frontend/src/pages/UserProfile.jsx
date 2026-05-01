@@ -42,7 +42,7 @@ const UserProfile = () => {
     setMessage(null);
 
     try {
-      const { data } = await api.put("/users/profile", {
+      const { data } = await api.put("/api/users/profile", {
         name,
         email,
         password: password || undefined,

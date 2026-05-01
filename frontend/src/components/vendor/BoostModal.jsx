@@ -11,7 +11,7 @@ export default function BoostModal({ product, onClose, onBoosted }) {
   useEffect(() => {
     const load = async () => {
       try {
-        const { data } = await api.get("/admin/settings/boost-packages");
+        const { data } = await api.get("/api/admin/settings/boost-packages");
         const normalized = Array.isArray(data) ? data : [];
         setTiers(normalized);
         setSelectedIdx(0);

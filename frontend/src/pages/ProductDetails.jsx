@@ -97,7 +97,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (!product || !user) return;
-    api.post("/activity/track-click", { productId: id }).catch(() => { });
+    api.post("/api/activity/track-click", { productId: id }).catch(() => { });
   }, [product, id, user]);
 
   useEffect(() => {
@@ -148,7 +148,7 @@ const ProductDetails = () => {
       }
 
       try {
-        const { data } = await api.get("/products");
+        const { data } = await api.get("/api/products");
         const currentCat = typeof product.category === "object" ? product.category?.name : product.category;
         const similar = data
           .filter((p) => {
@@ -294,7 +294,7 @@ const ProductDetails = () => {
     setSubmittingReport(true);
     try {
       const sellerId = product.seller?._id || product.seller?.id;
-      await api.post("/reports", {
+      await api.post("/api/reports", {
         targetId: sellerId,
         reportType: "user",
         reason: reportReason,

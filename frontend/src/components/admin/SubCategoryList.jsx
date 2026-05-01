@@ -13,8 +13,8 @@ export default function SubCategoryList({ onAdd = () => {} }) {
   const fetchAll = async () => {
     try {
       const [catRes, subRes] = await Promise.all([
-        api.get("/admin/categories").catch(() => api.get("/categories")),
-        api.get("/admin/subcategories").catch(() => api.get("/subcategories"))
+        api.get("/api/admin/categories").catch(() => api.get("/api/categories")),
+        api.get("/api/admin/subcategories").catch(() => api.get("/api/subcategories"))
       ]);
       setCategories(catRes.data || []);
       setSubs(subRes.data || []);

@@ -39,7 +39,7 @@ export default function NotificationsBell() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await api.get("/notifications/my");
+      const res = await api.get("/api/notifications/my");
       setItems(res.data || []);
     } catch {
       setItems([]);
@@ -78,7 +78,7 @@ export default function NotificationsBell() {
 
   const markAllRead = async () => {
     try {
-      await api.put("/notifications/read-all");
+      await api.put("/api/notifications/read-all");
       setItems(items.map(i => ({ ...i, read: true })));
     } catch { }
   };

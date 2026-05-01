@@ -51,7 +51,7 @@ export default function ProductReviews({ productId }) {
 
     setSubmitting(true);
     try {
-      await api.post("/reviews", {
+      await api.post("/api/reviews", {
         productId,
         rating,
         comment

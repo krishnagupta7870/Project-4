@@ -28,7 +28,7 @@ const SellerVerificationSection = () => {
     if (!kycEmail) return;
     setLoading(true);
     try {
-      await api.post("/admin/verifications/request-kyc", { email: kycEmail });
+      await api.post("/api/admin/verifications/request-kyc", { email: kycEmail });
       toast.success(`KYC Request sent to ${kycEmail}`);
       setKycEmail("");
       setShowKycModal(false);

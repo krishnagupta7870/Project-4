@@ -11,7 +11,7 @@ const ReportManagement = () => {
 
     const fetchReports = async () => {
         try {
-            const { data } = await api.get('/admin/reports');
+            const { data } = await api.get("/api/admin/reports");
             setReports(data);
         } catch (error) {
             toast.error("Failed to load reports");

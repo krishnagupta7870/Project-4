@@ -32,7 +32,7 @@ export default function ManageLogo() {
         const formData = new FormData();
         formData.append("logo", selectedFile);
         
-        await api.put("/admin/settings/logo", formData, {
+        await api.put("/api/admin/settings/logo", formData, {
             headers: { "Content-Type": "multipart/form-data" }
         });
         
@@ -52,7 +52,7 @@ export default function ManageLogo() {
     if (!urlInput) return;
     setUploading(true);
     try {
-        await api.put("/admin/settings/logo", { url: urlInput });
+        await api.put("/api/admin/settings/logo", { url: urlInput });
         await fetchLogo();
         setUrlInput("");
         setPreview(null);
@@ -68,7 +68,7 @@ export default function ManageLogo() {
   const resetDefault = async () => {
     if (!window.confirm("Are you sure you want to reset to default logo?")) return;
     try {
-        await api.put("/admin/settings/logo", { reset: "true" });
+        await api.put("/api/admin/settings/logo", { reset: "true" });
         await fetchLogo();
         alert("Logo reset to default");
     } catch (err) {

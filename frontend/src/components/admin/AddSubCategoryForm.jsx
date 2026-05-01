@@ -10,10 +10,10 @@ export default function AddSubCategoryForm({ onDone = () => {} }) {
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await api.get("/admin/categories");
+        const res = await api.get("/api/admin/categories");
         setCategories(res.data || []);
       } catch {
-        const res2 = await api.get("/categories");
+        const res2 = await api.get("/api/categories");
         setCategories(res2.data || []);
       }
     };
@@ -32,16 +32,16 @@ export default function AddSubCategoryForm({ onDone = () => {} }) {
     setSubmitting(true);
     try {
       if (payloadNames.length === 1) {
-        await api.post("/admin/subcategories", { name: payloadNames[0], category: categoryId });
+        await api.post("/api/admin/subcategories", { name: payloadNames[0], category: categoryId });
       } else {
-        await api.post("/admin/subcategories/bulk", { category: categoryId, names: payloadNames });
+        await api.post("/api/admin/subcategories/bulk", { category: categoryId, names: payloadNames });
       }
     } catch {
       try {
         if (payloadNames.length === 1) {
-          await api.post("/subcategories", { name: payloadNames[0], category: categoryId });
+          await api.post("/api/subcategories", { name: payloadNames[0], category: categoryId });
         } else {
-          await api.post("/subcategories/bulk", { category: categoryId, names: payloadNames });
+          await api.post("/api/subcategories/bulk", { category: categoryId, names: payloadNames });
         }
       } catch {
         setSubmitting(false);

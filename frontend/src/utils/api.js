@@ -10,7 +10,7 @@ export const API_BASE_URL =
 export const API_ORIGIN = API_BASE_URL.replace(/\/api$/, "") || window.location.origin;
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: API_ORIGIN,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

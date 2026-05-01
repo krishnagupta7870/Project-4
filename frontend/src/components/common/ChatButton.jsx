@@ -14,7 +14,7 @@ export default function ChatButton() {
     let mounted = true;
     async function fetchUnread() {
       try {
-        const res = await api.get("/chat/unread-count");
+        const res = await api.get("/api/chat/unread-count");
         if (mounted) setUnread(res.data?.count || 0);
       } catch {
         if (mounted) setUnread(0);

@@ -5,7 +5,7 @@ export default function SiteAnalytics() {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
-    api.get("/admin/stats").then(res => setStats(res.data));
+    api.get("/api/admin/stats").then(res => setStats(res.data));
   }, []);
 
   if (!stats) return <p className="text-muted">Loading analytics...</p>;

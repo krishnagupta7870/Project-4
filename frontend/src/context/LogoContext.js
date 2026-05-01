@@ -10,7 +10,7 @@ export function LogoProvider({ children }) {
 
   const fetchLogo = async () => {
     try {
-      const { data } = await api.get("/admin/settings/logo");
+      const { data } = await api.get("/api/admin/settings/logo");
       if (data?.logo) {
          let src = data.logo;
          // If it starts with /uploads, it's relative to backend root

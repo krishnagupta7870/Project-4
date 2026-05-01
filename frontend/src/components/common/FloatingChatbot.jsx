@@ -48,7 +48,7 @@ export default function FloatingChatbot() {
     appendMessage({ id: Date.now() + "-user-faq", from: "user", type: "text", text: userText });
     setLoading(true);
     try {
-      const res = await api.post("/ai/chatbot", {
+      const res = await api.post("/api/ai/chatbot", {
         mode: "faq",
         faqKey: item.key,
         message: userText
@@ -82,7 +82,7 @@ export default function FloatingChatbot() {
     setInput("");
 
     // Record Chatbot signal as a search intent
-    api.post("/activity/search", {
+    api.post("/api/activity/search", {
       raw: text,
       source: "chatbot",
       filters: null
@@ -90,7 +90,7 @@ export default function FloatingChatbot() {
 
     setLoading(true);
     try {
-      const res = await api.post("/ai/chatbot", {
+      const res = await api.post("/api/ai/chatbot", {
         mode: "free",
         message: text
       });

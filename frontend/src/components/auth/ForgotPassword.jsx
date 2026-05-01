@@ -29,7 +29,7 @@ export default function ForgetPassword() {
 
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/request-reset", { email });
+      const { data } = await api.post("/api/auth/request-reset", { email });
 
       let msg = data?.message || "If an account exists, a reset code has been sent.";
       if (data?.hint) {
@@ -56,7 +56,7 @@ export default function ForgetPassword() {
     setSuccess(null);
 
     try {
-      const { data } = await api.post("/auth/request-reset", { email });
+      const { data } = await api.post("/api/auth/request-reset", { email });
       setSuccess(data?.message || "Reset code resent.");
     } catch (err) {
       setError(err?.response?.data?.message || "Failed to resend code.");
@@ -82,7 +82,7 @@ export default function ForgetPassword() {
 
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/reset", {
+      const { data } = await api.post("/api/auth/reset", {
         email,
         code,
         newPassword,

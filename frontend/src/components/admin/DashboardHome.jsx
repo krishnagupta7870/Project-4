@@ -36,8 +36,8 @@ const DashboardHome = ({ onNavigate }) => {
     const fetchData = async () => {
       try {
         const [statsRes, salesRes] = await Promise.all([
-          api.get('/admin/stats'),
-          api.get('/admin/sales-data')
+          api.get("/api/admin/stats"),
+          api.get("/api/admin/sales-data")
         ]);
         setStats(statsRes.data);
         setSalesData(salesRes.data || []);

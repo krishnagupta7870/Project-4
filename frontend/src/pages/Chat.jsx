@@ -71,7 +71,7 @@ export default function Chat() {
     let mounted = true;
     async function loadConversations() {
       try {
-        const res = await api.get("/chat/conversations");
+        const res = await api.get("/api/chat/conversations");
         if (!mounted) return;
         setConversations(res.data || []);
         if (routeId) {
@@ -159,7 +159,7 @@ export default function Chat() {
     if (!text.trim() || !activeId) return;
     const payload = { conversationId: activeId, text: text.trim() };
     try {
-      const res = await api.post("/chat/messages", payload);
+      const res = await api.post("/api/chat/messages", payload);
       setMessages([...messages, res.data]);
       setText("");
     } catch { }
@@ -171,7 +171,7 @@ export default function Chat() {
       const file = new File([blob], `voice-${Date.now()}.webm`, { type: blob.type || "audio/webm" });
       form.append("audio", file);
       form.append("conversationId", activeId);
-      const res = await api.post("/chat/messages/audio", form, {
+      const res = await api.post("/api/chat/messages/audio", form, {
         headers: { "Content-Type": "multipart/form-data" }
       });
       setMessages((prev) => [...prev, res.data]);
@@ -180,7 +180,7 @@ export default function Chat() {
   async function sendThumbsUp() {
     if (!activeId) return;
     try {
-      const res = await api.post("/chat/messages", { conversationId: activeId, text: "👍" });
+      const res = await api.post("/api/chat/messages", { conversationId: activeId, text: "👍" });
       setMessages([...messages, res.data]);
     } catch { }
   }
@@ -201,7 +201,7 @@ export default function Chat() {
       await api.delete(`/chat/conversations/${activeId}/leave`);
       setShowOptions(false);
       // Refresh list
-      const res = await api.get("/chat/conversations");
+      const res = await api.get("/api/chat/conversations");
       setConversations(res.data || []);
       // Reset selection
       setActiveId(null);
@@ -225,12 +225,12 @@ export default function Chat() {
     try {
       const form = new FormData();
       files.forEach((f) => form.append("images", f));
-      const res = await api.post("/upload", form, {
+      const res = await api.post("/api/upload", form, {
         headers: { "Content-Type": "multipart/form-data" }
       });
       const urls = (res.data || []).map((p) => `${API_ORIGIN}${p}`);
       for (const url of urls) {
-        const sent = await api.post("/chat/messages", { conversationId: activeId, text: url });
+        const sent = await api.post("/api/chat/messages", { conversationId: activeId, text: url });
         setMessages((prev) => [...prev, sent.data]);
       }
     } catch { }
@@ -246,7 +246,7 @@ export default function Chat() {
     const url = gifUrl.trim();
     if (!url || !activeId) return;
     try {
-      const res = await api.post("/chat/messages", { conversationId: activeId, text: url });
+      const res = await api.post("/api/chat/messages", { conversationId: activeId, text: url });
       setMessages([...messages, res.data]);
       setGifUrl("");
       setShowGifInput(false);

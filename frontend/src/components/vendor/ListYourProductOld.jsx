@@ -98,7 +98,7 @@ export default function ListYourProduct({ isEmbedded, onCancel, onSuccess, initi
     try {
       // Send up to 4 images for analysis
       const imagesToSend = formData.images.slice(0, 4);
-      const res = await api.post("/ai/analyze", { imagePaths: imagesToSend });
+      const res = await api.post("/api/ai/analyze", { imagePaths: imagesToSend });
       const aiData = res.data;
 
       let newCategory = formData.category;
@@ -203,7 +203,7 @@ export default function ListYourProduct({ isEmbedded, onCancel, onSuccess, initi
 
     setUploading(true);
     try {
-      const res = await api.post("/upload", formDataUpload, {
+      const res = await api.post("/api/upload", formDataUpload, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       // Backend returns array of paths
@@ -241,7 +241,7 @@ export default function ListYourProduct({ isEmbedded, onCancel, onSuccess, initi
       if (initialData && initialData._id) {
         await api.put(`/products/${initialData._id}`, payload);
       } else {
-        await api.post("/products", payload);
+        await api.post("/api/products", payload);
       }
 
       if (onSuccess) {

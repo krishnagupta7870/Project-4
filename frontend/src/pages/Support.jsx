@@ -16,7 +16,7 @@ const Support = () => {
     setLoading(true);
     setError(null);
     try {
-      await api.post("/support", { email, subject, message });
+      await api.post("/api/support", { email, subject, message });
       setSuccess(true);
       setEmail("");
       setSubject("");

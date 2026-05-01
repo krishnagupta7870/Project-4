@@ -11,7 +11,7 @@ export default function SellerApproval() {
     try {
         setLoading(true);
         // Fetch all verifications (remove status filter to get all)
-        const res = await api.get("/admin/verifications");
+        const res = await api.get("/api/admin/verifications");
         if (res.data && Array.isArray(res.data)) {
             setSellers(res.data);
         } else {

@@ -27,7 +27,7 @@ export default function VerifyOtp() {
     setLoading(true);
     try {
       // ✅ SAME API PAYLOAD AS BEFORE
-      const { data } = await api.post('/auth/verify-otp', {
+      const { data } = await api.post("/api/auth/verify-otp", {
         email,
         code
       });

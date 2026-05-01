@@ -28,11 +28,11 @@ export default function AddCategoryForm({ onDone = () => {} }) {
       if (file) fd.append("image", file);
 
       try {
-        await api.post("/admin/categories", fd, {
+        await api.post("/api/admin/categories", fd, {
           headers: { "Content-Type": "multipart/form-data" }
         });
       } catch {
-        await api.post("/categories", fd, {
+        await api.post("/api/categories", fd, {
           headers: { "Content-Type": "multipart/form-data" }
         });
       }

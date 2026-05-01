@@ -16,11 +16,11 @@ export default function CategoryList({ onAdd = () => {} }) {
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const res = await api.get("/admin/categories");
+      const res = await api.get("/api/admin/categories");
       setCategories(res.data || []);
     } catch (err1) {
       try {
-        const res2 = await api.get("/categories");
+        const res2 = await api.get("/api/categories");
         setCategories(res2.data || []);
       } catch (err2) {
         setCategories([]);

@@ -17,7 +17,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const { data } = await api.post('/auth/login', { email, password });
+      const { data } = await api.post("/api/auth/login", { email, password });
 
       // ✅ STORE TOKEN
       if (data?.token) {
@@ -47,7 +47,7 @@ export default function Login() {
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
       setLoading(true);
-      const { data } = await api.post('/auth/google', {
+      const { data } = await api.post("/api/auth/google", {
         token: credentialResponse.credential
       });
 

@@ -234,7 +234,7 @@ export default function Browse() {
     async function loadData() {
       setLoading(true);
       try {
-        const prodRes = await api.get("/products");
+        const prodRes = await api.get("/api/products");
         if (!mounted) return;
         setProducts(prodRes.data || []);
       } catch (err) {

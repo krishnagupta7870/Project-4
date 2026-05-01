@@ -12,7 +12,7 @@ const Wishlist = () => {
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const { data } = await api.get("/wishlist/populated");
+        const { data } = await api.get("/api/wishlist/populated");
         setProducts(data);
       } catch (err) {
         console.error("Failed to fetch wishlist", err);
