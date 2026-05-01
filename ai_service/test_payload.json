@@ -1,0 +1,24 @@
+{
+    "base": {
+        "id": "1",
+        "title": "Samsung Galaxy Phone!!!",
+        "description": "Excellent Android smartphone! 8GB RAM. Buy here."
+    },
+    "candidates": [
+        {
+            "id": "2",
+            "title": "iPhone 14 Pro",
+            "description": "Apple iOS smartphone great camera"
+        },
+        {
+            "id": "3",
+            "title": "Wooden Study Table",
+            "description": "Brown furniture for bedroom!"
+        },
+        {
+            "id": "4",
+            "title": "Samsung Galaxy S22 Ultra",
+            "description": "Android phone samsung brand original"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="48" viewBox="0 0 200 48">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff6b6b"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="200" height="48" rx="10" fill="none"/>
+  <g transform="translate(8,6)">
+    <rect x="0" y="10" width="36" height="24" rx="8" fill="url(#g)"/>
+    <path d="M6 10c0-5 4-9 9-9h6c5 0 9 4 9 9" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="11" cy="37" r="3" fill="#ef4444"/>
+    <circle cx="29" cy="37" r="3" fill="#ef4444"/>
+  </g>
+  <g transform="translate(56,16)">
+    <text x="0" y="14" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#111827">CLASSYSHOP</text>
+    <text x="0" y="30" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600" fill="#6b7280" letter-spacing="1">BIG MEGA STORE</text>
+  </g>
+</svg>

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DEALMATE - System Architecture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            padding: 30px 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+
+        .architecture {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* === SECTION WRAPPER === */
+        .section {
+            border: 2px solid;
+            border-radius: 14px;
+            padding: 16px 14px;
+            background: #fff;
+            position: relative;
+        }
+
+        .section-label {
+            position: absolute;
+            top: -11px;
+            left: 16px;
+            background: #fff;
+            padding: 0 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .section-label i {
+            font-size: 11px;
+        }
+
+        /* === FRONTEND === */
+        .frontend {
+            border-color: #e0c3fc;
+            width: 220px;
+            min-height: 600px;
+        }
+
+        .frontend .section-label {
+            color: #9b59b6;
+        }
+
+        .screens-box {
+            border: 1.5px solid #e0c3fc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 14px;
+        }
+
+        .screens-box .box-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: #9b59b6;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .screen-item {
+            text-align: center;
+        }
+
+        .screen-item i {
+            font-size: 24px;
+            color: #7c3aed;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .screen-item span {
+            font-size: 10px;
+            font-weight: 600;
+            color: #444;
+            line-height: 1.2;
+            display: block;
+        }
+
+        .client-app {
+            text-align: center;
+            margin: 14px 0;
+            padding: 10px;
+            border: 1.5px dashed #d4a8f7;
+            border-radius: 10px;
+        }
+
+        .client-app i {
+            font-size: 32px;
+            color: #61dafb;
+        }
+
+        .client-app span {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #444;
+            margin-top: 4px;
+        }
+
+        .storage-item {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .storage-item i {
+            font-size: 24px;
+            color: #888;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .storage-item span {
+            font-size: 10px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* === CONNECTOR COLUMN === */
+        .connector-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            padding-top: 200px;
+        }
+
+        .conn-line {
+            color: #999;
+            font-size: 22px;
+        }
+
+        /* === BACKEND === */
+        .backend-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            width: 140px;
+            padding-top: 180px;
+        }
+
+        .backend-box {
+            border: 2px solid #f0c27a;
+            border-radius: 14px;
+            padding: 14px;
+            background: #fff;
+            text-align: center;
+            width: 130px;
+            position: relative;
+        }
+
+        .backend-box .section-label {
+            color: #d4880f;
+        }
+
+        .backend-box i {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .backend-box span {
+            font-size: 11px;
+            font-weight: 700;
+            color: #444;
+            display: block;
+        }
+
+        .jwt-box {
+            border: 1.5px solid #f0c27a;
+            border-radius: 10px;
+            padding: 10px;
+            background: #fffbf0;
+            text-align: center;
+            width: 130px;
+        }
+
+        .jwt-box i {
+            font-size: 26px;
+            color: #d4880f;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .jwt-box span {
+            font-size: 10px;
+            font-weight: 700;
+            color: #555;
+        }
+
+        /* === CONNECTOR 2 === */
+        .connector-col2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 50px;
+            padding-top: 60px;
+            gap: 0;
+        }
+
+        .v-line {
+            width: 2px;
+            background: #ccc;
+            flex: 1;
+        }
+
+        .h-branch {
+            display: flex;
+            align-items: center;
+        }
+
+        .h-branch-line {
+            width: 30px;
+            height: 2px;
+            background: #ccc;
+        }
+
+        /* === API ROUTES === */
+        .routes-col {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 220px;
+        }
+
+        .routes-wrapper {
+            border: 2px solid #f0c27a;
+            border-radius: 14px;
+            padding: 14px 12px;
+            background: #fff;
+            position: relative;
+        }
+
+        .routes-wrapper .section-label {
+            color: #d4880f;
+        }
+
+        .route-group {
+            border: 1.5px solid #e8d5f5;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #fdf8ff;
+        }
+
+        .route-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .route-group-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: #9b59b6;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .route-group-label i {
+            font-size: 10px;
+        }
+
+        .route-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .route-item {
+            text-align: center;
+            width: 70px;
+        }
+
+        .route-item i {
+            font-size: 22px;
+            color: #7c3aed;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .route-item span {
+            font-size: 9px;
+            font-weight: 600;
+            color: #555;
+            line-height: 1.2;
+            display: block;
+        }
+
+        /* AI Routes special color */
+        .route-group.ai-route {
+            border-color: #bbdefb;
+            background: #f0f7ff;
+        }
+
+        .route-group.ai-route .route-group-label {
+            color: #1565c0;
+        }
+
+        .route-group.ai-route .route-item i {
+            color: #1565c0;
+        }
+
+        /* === CONNECTOR 3 === */
+        .connector-col3 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50px;
+            padding-top: 40px;
+        }
+
+        /* === DATABASE === */
+        .db-col {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 120px;
+        }
+
+        .db-section {
+            border: 2px solid #f0c27a;
+            border-radius: 14px;
+            padding: 14px 10px;
+            background: #fff;
+            position: relative;
+        }
+
+        .db-section .section-label {
+            color: #d4880f;
+        }
+
+        .db-model {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .db-model:last-child {
+            border-bottom: none;
+        }
+
+        .db-model i {
+            font-size: 16px;
+            color: #4db33d;
+            width: 20px;
+            text-align: center;
+        }
+
+        .db-model span {
+            font-size: 11px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        /* === EXTERNAL SERVICES === */
+        .ext-section {
+            border: 2px solid #f0c27a;
+            border-radius: 14px;
+            padding: 14px 10px;
+            background: #fff;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .ext-section .section-label {
+            color: #d4880f;
+        }
+
+        .ext-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .ext-item:last-child {
+            border-bottom: none;
+        }
+
+        .ext-item i {
+            font-size: 18px;
+            width: 22px;
+            text-align: center;
+        }
+
+        .ext-item span {
+            font-size: 11px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        /* === SVG ARROWS === */
+        .svg-arrows {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .architecture>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Arrow between columns */
+        .arrow-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            color: #aaa;
+            font-size: 14px;
+            padding-top: 200px;
+        }
+
+        .arrow-col .arr {
+            font-size: 20px;
+            color: #999;
+        }
+
+        .arr-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 8px;
+            font-weight: 700;
+            color: #999;
+            letter-spacing: 0.5px;
+        }
+
+        /* Simple horizontal arrow */
+        .h-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            flex-shrink: 0;
+        }
+
+        .h-arrow .line {
+            width: 25px;
+            height: 2px;
+            background: #bbb;
+            position: relative;
+        }
+
+        .h-arrow .line::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid #bbb;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        /* Bidirectional arrow */
+        .bi-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            flex-shrink: 0;
+        }
+
+        .bi-arrow .line {
+            width: 25px;
+            height: 2px;
+            background: #bbb;
+            position: relative;
+        }
+
+        .bi-arrow .line::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-right: 8px solid #bbb;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        .bi-arrow .line::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid #bbb;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        /* Vertical connections for route branching */
+        .vert-pipe {
+            width: 2px;
+            background: #ccc;
+            position: relative;
+        }
+
+        .vert-pipe::before,
+        .vert-pipe::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>DEALMATE — System Architecture</h1>
+
+    <div class="architecture">
+
+        <!-- ========== FRONTEND ========== -->
+        <div class="section frontend">
+            <div class="section-label"><i class="fa-solid fa-gear"></i> FRONTEND</div>
+
+            <div class="screens-box">
+                <div class="box-label"><i class="fa-regular fa-window-maximize"></i> USER SCREENS</div>
+                <div class="screens-grid">
+                    <div class="screen-item">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Home</span>
+                    </div>
+                    <div class="screen-item">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Browse</span>
+                    </div>
+                    <div class="screen-item">
+                        <i class="fa-solid fa-box-open"></i>
+                        <span>Product Details</span>
+                    </div>
+                    <div class="screen-item">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Seller Profile</span>
+                    </div>
+                    <div class="screen-item">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Profile</span>
+                    </div>
+                    <div class="screen-item">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Login / Signup</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="client-app">
+                <i class="fa-brands fa-react"></i>
+                <span>React Client Application</span>
+            </div>
+
+            <div class="screens-grid" style="margin-top:10px;">
+                <div class="screen-item">
+                    <i class="fa-solid fa-chart-line" style="font-size:22px;"></i>
+                    <span>Seller Dashboard</span>
+                </div>
+                <div class="screen-item">
+                    <i class="fa-solid fa-user-shield" style="font-size:22px;"></i>
+                    <span>Admin Dashboard</span>
+                </div>
+            </div>
+
+            <div class="storage-item">
+                <i class="fa-solid fa-database"></i>
+                <span>Local Storage</span>
+            </div>
+        </div>
+
+        <!-- Arrow: Frontend → Backend -->
+        <div class="h-arrow" style="padding-top:200px;align-self:flex-start;">
+            <div class="line"></div>
+        </div>
+
+        <!-- ========== BACKEND ========== -->
+        <div class="backend-col">
+            <div class="backend-box">
+                <div class="section-label"><i class="fa-solid fa-gear"></i> BACKEND</div>
+                <i class="fa-brands fa-node-js" style="color:#68a063;"></i>
+                <span>Express.js Server</span>
+            </div>
+
+            <div style="color:#ccc;font-size:18px;">↓</div>
+
+            <div class="jwt-box">
+                <i class="fa-solid fa-lock"></i>
+                <span>JWT Authentication</span>
+            </div>
+
+            <div style="color:#ccc;font-size:18px;">↓</div>
+
+            <div class="jwt-box">
+                <i class="fa-solid fa-plug" style="color:#00838f;"></i>
+                <span>Socket.IO Server</span>
+            </div>
+        </div>
+
+        <!-- Arrow: Backend → Routes -->
+        <div class="h-arrow" style="padding-top:200px;align-self:flex-start;">
+            <div class="line"></div>
+        </div>
+
+        <!-- ========== API ROUTES ========== -->
+        <div class="routes-wrapper">
+            <div class="section-label"><i class="fa-solid fa-route"></i> API ROUTES</div>
+
+            <div class="route-group">
+                <div class="route-group-label"><i class="fa-solid fa-user"></i> USER ROUTES</div>
+                <div class="route-items">
+                    <div class="route-item"><i class="fa-solid fa-user-plus"></i><span>Registration</span></div>
+                    <div class="route-item"><i class="fa-solid fa-arrow-right-to-bracket"></i><span>Login</span></div>
+                    <div class="route-item"><i class="fa-solid fa-id-card"></i><span>Profile Mgmt</span></div>
+                </div>
+            </div>
+
+            <div class="route-group">
+                <div class="route-group-label"><i class="fa-solid fa-box"></i> PRODUCT ROUTES</div>
+                <div class="route-items">
+                    <div class="route-item"><i class="fa-solid fa-list"></i><span>Listing</span></div>
+                    <div class="route-item"><i class="fa-solid fa-search"></i><span>Searching</span></div>
+                    <div class="route-item"><i class="fa-solid fa-circle-info"></i><span>Details</span></div>
+                </div>
+            </div>
+
+            <div class="route-group">
+                <div class="route-group-label"><i class="fa-solid fa-cart-shopping"></i> ORDER ROUTES</div>
+                <div class="route-items">
+                    <div class="route-item"><i class="fa-solid fa-circle-plus"></i><span>Create Order</span></div>
+                    <div class="route-item"><i class="fa-solid fa-pen-to-square"></i><span>Manage Order</span></div>
+                    <div class="route-item"><i class="fa-solid fa-circle-xmark"></i><span>Cancel Order</span></div>
+                </div>
+            </div>
+
+            <div class="route-group">
+                <div class="route-group-label"><i class="fa-solid fa-star"></i> REVIEW ROUTES</div>
+                <div class="route-items">
+                    <div class="route-item"><i class="fa-solid fa-circle-plus"></i><span>Add Review</span></div>
+                    <div class="route-item"><i class="fa-solid fa-pen"></i><span>Edit Review</span></div>
+                </div>
+            </div>
+
+            <div class="route-group">
+                <div class="route-group-label"><i class="fa-solid fa-comments"></i> CHAT ROUTES</div>
+                <div class="route-items">
+                    <div class="route-item"><i class="fa-solid fa-paper-plane"></i><span>Send Message</span></div>
+                    <div class="route-item"><i class="fa-solid fa-envelope-open"></i><span>Receive Message</span></div>
+                </div>
+            </div>
+
+            <div class="route-group">
+                <div class="route-group-label"><i class="fa-solid fa-shield-halved"></i> KYC ROUTES</div>
+                <div class="route-items">
+                    <div class="route-item"><i class="fa-solid fa-circle-check"></i><span>Verify Identity
+                            Documents</span></div>
+                </div>
+            </div>
+
+            <div class="route-group">
+                <div class="route-group-label"><i class="fa-solid fa-credit-card"></i> PAYMENT ROUTES</div>
+                <div class="route-items">
+                    <div class="route-item"><i class="fa-brands fa-stripe-s" style="color:#635bff;"></i><span>Stripe
+                            Integration</span></div>
+                    <div class="route-item"><i class="fa-solid fa-wallet" style="color:#5c2d91;"></i><span>Khalti
+                            Integration</span></div>
+                </div>
+            </div>
+
+            <div class="route-group ai-route">
+                <div class="route-group-label"><i class="fa-solid fa-brain"></i> AI / ML ROUTES</div>
+                <div class="route-items">
+                    <div class="route-item"><i class="fa-solid fa-robot" style="color:#1565c0;"></i><span>Sentiment
+                            Analysis</span></div>
+                    <div class="route-item"><i class="fa-solid fa-wand-magic-sparkles"
+                            style="color:#1565c0;"></i><span>Recommend-ations</span></div>
+                    <div class="route-item"><i class="fa-solid fa-image" style="color:#1565c0;"></i><span>AI
+                            Description</span></div>
+                </div>
+            </div>
+
+            <div class="route-group">
+                <div class="route-group-label"><i class="fa-solid fa-user-shield"></i> ADMIN ROUTES</div>
+                <div class="route-items">
+                    <div class="route-item"><i class="fa-solid fa-users-gear"></i><span>Manage Users</span></div>
+                    <div class="route-item"><i class="fa-solid fa-chart-pie"></i><span>Analytics</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arrow: Routes → DB -->
+        <div class="h-arrow" style="padding-top:200px;align-self:flex-start;">
+            <div class="line"></div>
+        </div>
+
+        <!-- ========== RIGHT COLUMN: DB + External ========== -->
+        <div>
+            <!-- DATABASE MODELS -->
+            <div class="db-section">
+                <div class="section-label"><i class="fa-solid fa-database"></i> DATABASE MODELS</div>
+                <div class="db-model"><i class="fa-solid fa-users"></i><span>Users</span></div>
+                <div class="db-model"><i class="fa-solid fa-boxes-stacked"></i><span>Products</span></div>
+                <div class="db-model"><i class="fa-solid fa-receipt"></i><span>Orders</span></div>
+                <div class="db-model"><i class="fa-solid fa-star-half-stroke"></i><span>Reviews</span></div>
+                <div class="db-model"><i class="fa-solid fa-comments"></i><span>Conversations</span></div>
+                <div class="db-model"><i class="fa-solid fa-envelope"></i><span>Messages</span></div>
+                <div class="db-model"><i class="fa-solid fa-bell"></i><span>Notifications</span></div>
+                <div class="db-model"><i class="fa-solid fa-eye"></i><span>ProductViews</span></div>
+                <div class="db-model"><i class="fa-solid fa-file-shield"></i><span>KYC Documents</span></div>
+                <div class="db-model"><i class="fa-solid fa-money-bill-transfer"></i><span>Payments</span></div>
+            </div>
+
+            <!-- EXTERNAL SERVICES -->
+            <div class="ext-section">
+                <div class="section-label"><i class="fa-solid fa-cloud"></i> EXTERNAL SERVICES</div>
+                <div class="ext-item"><i class="fa-brands fa-stripe-s" style="color:#635bff;"></i><span>Stripe</span>
+                </div>
+                <div class="ext-item"><i class="fa-solid fa-wallet" style="color:#5c2d91;"></i><span>Khalti</span></div>
+                <div class="ext-item"><i class="fa-solid fa-cloud-arrow-up"
+                        style="color:#3448c5;"></i><span>Cloudinary</span></div>
+                <div class="ext-item"><i class="fa-solid fa-wand-magic-sparkles" style="color:#4285f4;"></i><span>Gemini
+                        API</span></div>
+                <div class="ext-item"><i class="fa-brands fa-google" style="color:#ea4335;"></i><span>Google
+                        OAuth</span></div>
+                <div class="ext-item"><i class="fa-solid fa-map-location-dot"
+                        style="color:#7bb32e;"></i><span>OpenStreetMap</span></div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+.legal-page-container {
+    background-color: #fcfcfd;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, sans-serif;
+    padding-bottom: 120px;
+}
+
+.legal-header {
+    background: #0f172a;
+    color: white;
+    padding: 100px 24px;
+    text-align: center;
+}
+
+.legal-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -1.5px;
+}
+
+.legal-header p {
+    color: #94a3b8;
+    font-size: 1.1rem;
+}
+
+.legal-layout {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+}
+
+/* Sidebar Navigation */
+.legal-sidebar {
+    position: sticky;
+    top: 40px;
+    height: fit-content;
+}
+
+.legal-nav-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+}
+
+.legal-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.legal-nav-links a {
+    color: #475569;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: block;
+}
+
+.legal-nav-links a:hover {
+    color: #4aa3a1;
+    background: #f1f5f9;
+}
+
+.legal-nav-links a.active {
+    color: #4aa3a1;
+    background: #ecfdf5;
+    font-weight: 700;
+}
+
+/* Main Content Area */
+.legal-body {
+    background: white;
+    padding: 80px;
+    border-radius: 24px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+.last-updated-badge {
+    display: inline-block;
+    background: #f1f5f9;
+    color: #64748b;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.legal-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.legal-section-block h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 24px;
+}
+
+.legal-section-block p {
+    color: #334155;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.legal-section-block ul {
+    padding-left: 20px;
+    color: #475569;
+}
+
+.legal-section-block li {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.legal-footer-contact {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 1rem;
+}
+
+.legal-footer-contact a {
+    color: #4aa3a1;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+    .legal-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .legal-sidebar {
+        display: none;
+        /* Hide TOC on smaller screens for simplicity */
+    }
+
+    .legal-body {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .legal-header h1 {
+        font-size: 2.25rem;
+    }
+}

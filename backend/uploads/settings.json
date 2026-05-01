@@ -1,0 +1,133 @@
+{
+  "logo": "/uploads/product-1766909683670-522860953.png",
+  "footer": {
+    "columns": [
+      {
+        "title": "POPULAR LOCATIONS",
+        "links": [
+          {
+            "label": "Kolkata",
+            "url": "/location/kolkata"
+          },
+          {
+            "label": "Mumbai",
+            "url": "/location/mumbai"
+          },
+          {
+            "label": "Chennai",
+            "url": "/location/chennai"
+          },
+          {
+            "label": "Pune",
+            "url": "/location/pune"
+          }
+        ]
+      },
+      {
+        "title": "TRENDING LOCATIONS",
+        "links": [
+          {
+            "label": "Bhubaneshwar",
+            "url": "/location/bhubaneshwar"
+          },
+          {
+            "label": "Hyderabad",
+            "url": "/location/hyderabad"
+          },
+          {
+            "label": "Chandigarh",
+            "url": "/location/chandigarh"
+          },
+          {
+            "label": "Nashik",
+            "url": "/location/nashik"
+          }
+        ]
+      },
+      {
+        "title": "ABOUT US",
+        "links": [
+          {
+            "label": "About DealMate",
+            "url": "/about"
+          },
+          {
+            "label": "Careers",
+            "url": "/careers"
+          },
+          {
+            "label": "Contact Us",
+            "url": "/contact"
+          },
+          {
+            "label": "DealMate People",
+            "url": "/people"
+          }
+        ]
+      },
+      {
+        "title": "DEALMATE",
+        "links": [
+          {
+            "label": "Help",
+            "url": "/help"
+          },
+          {
+            "label": "Sitemap",
+            "url": "/sitemap"
+          },
+          {
+            "label": "Legal & Privacy",
+            "url": "/legal"
+          },
+          {
+            "label": "Blog",
+            "url": "/blog"
+          }
+        ]
+      }
+    ],
+    "socials": {
+      "facebook": "https://facebook.com",
+      "instagram": "https://instagram.com",
+      "twitter": "https://twitter.com",
+      "youtube": "https://youtube.com"
+    },
+    "apps": {
+      "playStore": "#",
+      "appStore": "#"
+    }
+  },
+  "boostPackages": [
+    {
+      "label": "6 Hours",
+      "hours": 7,
+      "price": 100
+    },
+    {
+      "label": "12 Hours",
+      "hours": 12,
+      "price": 180
+    },
+    {
+      "label": "24 Hours",
+      "hours": 24,
+      "price": 320
+    },
+    {
+      "label": "3 Days",
+      "hours": 72,
+      "price": 800
+    },
+    {
+      "label": "5 Days",
+      "hours": 120,
+      "price": 1200
+    },
+    {
+      "label": "7 Days",
+      "hours": 168,
+      "price": 1600
+    }
+  ]
+}

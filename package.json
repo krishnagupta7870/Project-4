@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm start --prefix frontend\" \"python ai_service/sentiment.py\" \"python ai_service/recommend.py\"",
+    "install-all": "npm install && npm install --prefix backend && npm install --prefix frontend"
+  },
+  "dependencies": {
+    "all": "^0.0.0",
+    "lucide-react": "^0.562.0",
+    "mongoose": "^9.1.2",
+    "recharts": "^3.6.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
